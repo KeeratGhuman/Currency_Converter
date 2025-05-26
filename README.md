@@ -21,8 +21,7 @@ It performs real-time conversions between any two ISO 4217 currencies using a fr
    * “From” and “To” dropdowns auto-populated with supported currency codes.
 2. **Live Conversion**  
    * `input` and `change` events fire `convert()` instantly—no submit button.  
-   * Makes a GET request like  
-     `https://api.exchangerate.host/convert?from=USD&to=CAD&amount=100`.  
+   * Makes a GET request
    * Parses the JSON response and displays the converted total to two decimal places.
 3. **Error Handling**  
    * Shows friendly messages if the API is unreachable or data is invalid.
