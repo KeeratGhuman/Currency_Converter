@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Keerat Ghuman | Currency Converter</title>
+
+    <!--Tailwind -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
+    <style>      
+        body { font-family: 'Inter', sans-serif; }
+        input, select { font-family: 'JetBrains Mono', monospace; }
+        @layer properties{@supports (((-webkit-hyphens:none)) and (not (margin-trim:inline))) or ((-moz-orient:inline) and (not (color:rgb(from red r g b)))){*,:before,:after,::backdrop{--tw-border-style:solid;--tw-shadow:0 0 #0000;--tw-shadow-color:initial;--tw-shadow-alpha:100%;--tw-inset-shadow:0 0 #0000;--tw-inset-shadow-color:initial;--tw-inset-shadow-alpha:100%;--tw-ring-color:initial;--tw-ring-shadow:0 0 #0000;--tw-inset-ring-color:initial;--tw-inset-ring-shadow:0 0 #0000;--tw-ring-inset:initial;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-offset-shadow:0 0 #0000}}}.mx-auto{margin-inline:auto}.mb-\[10px\]{margin-bottom:10px}.block{display:block}.flex{display:flex}.grid{display:grid}.hidden{display:none}.min-h-screen{min-height:100vh}.w-full{width:100%}.flex-1{flex:1}.shrink-0{flex-shrink:0}.flex-col{flex-direction:column}.place-content-center{place-content:center}.items-center{align-items:center}.items-end{align-items:flex-end}.justify-center{justify-content:center}.rounded-full{border-radius:3.40282e38px}.border{border-style:var(--tw-border-style);border-width:1px}.bg-gradient-to-b{--tw-gradient-position:to bottom in oklab;background-image:linear-gradient(var(--tw-gradient-stops))}.text-center{text-align:center}.whitespace-nowrap{white-space:nowrap}.ring-1{--tw-ring-shadow:var(--tw-ring-inset,)0 0 0 calc(1px + var(--tw-ring-offset-width))var(--tw-ring-color,currentcolor);box-shadow:var(--tw-inset-shadow),var(--tw-inset-ring-shadow),var(--tw-ring-offset-shadow),var(--tw-ring-shadow),var(--tw-shadow)}.transition{transition-property:color,background-color,border-color,outline-color,text-decoration-color,fill,stroke,--tw-gradient-from,--tw-gradient-via,--tw-gradient-to,opacity,box-shadow,transform,translate,scale,rotate,filter,-webkit-backdrop-filter,backdrop-filter,display,visibility,content-visibility,overlay,pointer-events;transition-timing-function:var(--tw-ease,ease);transition-duration:var(--tw-duration,0s)}.select-none{-webkit-user-select:none;user-select:none}.focus\:ring-2:focus{--tw-ring-shadow:var(--tw-ring-inset,)0 0 0 calc(2px + var(--tw-ring-offset-width))var(--tw-ring-color,currentcolor);box-shadow:var(--tw-inset-shadow),var(--tw-inset-ring-shadow),var(--tw-ring-offset-shadow),var(--tw-ring-shadow),var(--tw-shadow)}.focus\:outline-none:focus{--tw-outline-style:none;outline-style:none}@property --tw-border-style{syntax:"*";inherits:false;initial-value:solid}@property --tw-shadow{syntax:"*";inherits:false;initial-value:0 0 #0000}@property --tw-shadow-color{syntax:"*";inherits:false}@property --tw-shadow-alpha{syntax:"<percentage>";inherits:false;initial-value:100%}@property --tw-inset-shadow{syntax:"*";inherits:false;initial-value:0 0 #0000}@property --tw-inset-shadow-color{syntax:"*";inherits:false}@property --tw-inset-shadow-alpha{syntax:"<percentage>";inherits:false;initial-value:100%}@property --tw-ring-color{syntax:"*";inherits:false}@property --tw-ring-shadow{syntax:"*";inherits:false;initial-value:0 0 #0000}@property --tw-inset-ring-color{syntax:"*";inherits:false}@property --tw-inset-ring-shadow{syntax:"*";inherits:false;initial-value:0 0 #0000}@property --tw-ring-inset{syntax:"*";inherits:false}@property --tw-ring-offset-width{syntax:"<length>";inherits:false;initial-value:0}@property --tw-ring-offset-color{syntax:"*";inherits:false;initial-value:#fff}@property --tw-ring-offset-shadow{syntax:"*";inherits:false;initial-value:0 0 #0000}
+    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+
+<body class="min-h-screen flex flex-col lg:flex-row bg-slate-50">
+
+    <!--Left side-->
+    <aside class="lg:w-1/2 flex flex-col justify-center gap-6 px-10 py-24 text-white text-center lg:text-left bg-gradient-to-b from-red-700 to-red-600">
+        <h1 class="text-5xl font-extrabold leading-tight tracking-tight">
+            Keerat&nbsp;Ghuman’s<br class="hidden lg:block">Currency&nbsp;Converter
+        </h1>
+        <p class="text-lg/relaxed max-w-md mx-auto lg:mx-0">
+            Convert any currency to another <span class="whitespace-nowrap">in&nbsp;real&nbsp;time</span> based on real.
+        </p>
+    </aside>
+
+    <!--Right side-->
+    <main class="lg:w-1/2 flex items-center justify-center p-6 lg:p-12">
+        <div id="converter"
+            class="w-full max-w-lg rounded-3xl bg-white/90 backdrop-blur shadow-2xl ring-1 ring-slate-200 p-8">
+
+            <!--Amount-->
+            <label for="amount" class="block text-sm font-medium text-slate-600 mb-1">
+                Amount to Convert
+            </label>
+            <input id="amount" type="number" step="0.01" value="1"
+                class="w-full rounded-xl border border-red-300 px-4 py-3 mb-6 transition
+                focus:outline-none focus:ring-2 focus:ring-red-500" />
+
+            <!--From, to Section. Includes swap between too-->
+            <div class="flex items-end gap-3 mb-8">
+                <!--From-->
+                <div class="flex-1">
+                    <label for="from" class="block text-sm font-medium text-slate-600 mb-1">
+                        From
+                    </label>
+                    <select id="from"
+                            class="w-full rounded-xl border border-red-300 px-4 py-3 transition
+                            focus:outline-none focus:ring-2 focus:ring-red-500"></select>
+                </div>
+
+                <!--Swap button-->
+                <button id="swap"
+                        class="
+                        shrink-0 mb-[10px] h-11 w-11 rounded-full grid place-content-center
+                        bg-red-50 hover:bg-red-100
+                        text-red-600 hover:text-red-700
+                        border border-red-200
+                        transition
+                        ">
+                <!--Arrow icon within the swap button-->
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                        class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M7 16V8m0 0L3 12m4-4l4 4m6-4v8m0 0l4-4m-4 4l-4-4" />
+                    </svg>
+                </button>
+
+
+                <!--To-->
+                <div class="flex-1">
+                <label for="to" class="block text-sm font-medium text-slate-600 mb-1">
+                    To
+                </label>
+                <select id="to"
+                        class="w-full rounded-xl border border-red-300 px-4 py-3 transition
+                        focus:outline-none focus:ring-2 focus:ring-red-500"></select>
+                </div>
+            </div>
+
+            <!--Result-->
+            <div id="result"
+                class="rounded-xl bg-red-50 py-4 text-center
+                        text-3xl font-semibold text-red-700 tracking-tight
+                        drop-shadow-sm select-none">
+                —
+            </div>
+        </div>
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script>
+        (() => {
+            const API_KEY     = '683993921c1d43e8a7ca87f43b1abe8b';                
+            const SYMBOLS_URL = 'https://api.currencyfreaks.com/v2.0/currency-symbols';
+            const LATEST_URL  = 'https://api.currencyfreaks.com/v2.0/rates/latest';
+          
+            
+            const $amount  = $('#amount');   // number input
+            const $from    = $('#from');     // <select> base currency
+            const $to      = $('#to');       // <select> quote currency
+            const $swapButton = $('#swap');     // little circular arrow button
+            const $result  = $('#result');   // where the answer is printed
+          
+            /*Populating the currency options given by the API*/
+            async function loadSymbols () {
+              try {
+                const { currencySymbols } = await fetch(SYMBOLS_URL).then(r => r.json());
+                const codes = Object.keys(currencySymbols).sort();                // A-Z order
+          
+                codes.forEach(code => {
+                  const label = `${code} — ${currencySymbols[code]}`;            // "USD — US Dollar"
+                  $('<option>', { value: code, text: label }).appendTo($from);
+                  $('<option>', { value: code, text: label }).appendTo($to);
+                });
+          
+                //defaults when user enters the application
+                $from.val('USD');
+                $to.val('CAD');
+                convert();                                                       
+              } catch (err) {
+                console.error('Symbol load failed:', err);
+                $result.text('⚠ Unable to load currency list.');
+              }
+            }
+          
+            /*Conversion logic*/
+            async function convert () {
+              const amt = parseFloat($amount.val());
+              if (!amt || amt <= 0) {
+                $result.text('Enter a valid amount');//Ensures the user enters a valid number
+                return;
+              }
+          
+              //if the user picks the same currency in both from and to, no need for network request 
+              const from = $from.val();
+              const to   = $to.val();
+              if (from === to) {                                                 
+                $result.text(`${amt.toFixed(2)} ${from} = ${amt.toFixed(2)} ${to}`);
+                return;
+              }
+          
+              try {
+                // ask API only for the two relevant currencies that are being converted
+                const url  = `${LATEST_URL}?apikey=${API_KEY}&symbols=${from},${to}`;
+                const data = await fetch(url).then(r => r.json()); //JSON payload from the API 
+          
+                // Cross-rate math: map each currency to its USD rate since the base is USD on the free tier then amount / rateFrom × rateTo
+                const baseUSD      = data.base; // base currency USD is used by the API
+                const rateFromUSD  = from === baseUSD ? 1 : parseFloat(data.rates[from]);
+                const rateToUSD    = to   === baseUSD ? 1 : parseFloat(data.rates[to]);
+                const converted    = amt / rateFromUSD * rateToUSD; // cross-rate math
+          
+                $result.text(`${amt.toFixed(2)} ${from} = ${converted.toFixed(2)} ${to}`); //result in 2 decimal points 
+              } catch (err) {
+                console.error('Conversion failed:', err);
+                $result.text('Conversion failed.');
+              }
+            }
+          
+            function addEventListeners () {
+              // real-time responsiveness
+              $amount.on('input',  convert);
+              $from  .on('change', convert);
+              $to    .on('change', convert);
+          
+              //swap interaction
+              $swapButton.on('click', () => {
+                const temp = $from.val();
+                $from.val($to.val());
+                $to.val(temp);
+                convert();
+              });
+            }
+          
+            $(document).ready(() => {
+              loadSymbols();      // asynchronously populates the selects then fires the first conversion
+              addEventListeners();
+            });
+          })();          
+    </script>
+</body>
+</html>
